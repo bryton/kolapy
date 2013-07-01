@@ -1,0 +1,117 @@
+<script>
+    $(document).ready(
+    function() 
+    {
+    	g = new Dygraph(
+			document.getElementById("graphdiv"),  // the containing div
+			"Date,Price\n{{ csv }}",
+			{ }                                   // the options
+			);
+    	
+		$("#button").click(function() // the element with ID: 'button' is
+									  // located in home/main_container.html
+		{
+				
+			var input_string = $("#id_ticker").val();   // element with ID:
+														// 'id_ticker' is
+														// located in
+														// home/main_container.html
+			var input_startdate = $("#date1").val();    // ...located in
+														// home/main_container.html
+			var input_enddate = $("#date2").val();      // ...located in
+														// home/main_container.html
+			$.ajax({
+				url : "/display/",
+				type : "POST",
+				data : 
+				{
+					ticker : input_string,
+					csrfmiddlewaretoken: '{{ csrf_token }}'
+				},
+				success: function(csv_file) 
+				{
+					g.updateOptions( 
+					{ 
+					file : csv_file,
+					dateWindow: [ Date.parse("" + input_startdate + " 00:00:00"), 
+					              Date.parse("" + input_enddate + " 24:00:00") ]
+					} );            
+				},
+				error : function(xhr,errmsg,err) 
+				{
+					alert(xhr.status + ": errmsg = " + errmsg + ": " + xhr.responseText);
+				}
+			});
+			return false;
+		});						
+	});
+	
+	
+	// User input form
+    $(function(){
+        //$( "#date1" ).datepicker({autoclose: true});
+    	//$( "#date2" ).datepicker({autoclose: true});
+    	
+    	var nowTemp = new Date();
+    	var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+    	
+    	var startdate = $('#date1').datepicker().on('changeDate', function(ev) 
+    	{
+    		if (enddate.date.valueOf() == null)
+    		{
+    			enddate.setValue(now);
+    		}
+    			
+    		if (ev.date.valueOf() > enddate.date.valueOf()) 
+    		{
+    			var newDate = new Date(ev.date);
+    			newDate.setDate(startdate.getDate() + 1);
+    			enddate.setValue(newDate);
+    		}
+    		startdate.hide();
+    		$('#date2')[0].focus();
+    	}).data('datepicker');
+    	
+    	var enddate = $("#date2").datepicker
+    	({
+    		onRender: function(date) 
+    		{
+    			return date.valueOf() <= startdate.date.valueOf() ? 'disabled' : '';
+    		}
+    	}).on('changeDate', function(ev) {
+    		enddate.hide();
+    	}).data('datepicker');
+    });
+
+
+
+
+
+
+/*
+
+	
+	var checkin = $('#date1').datepicker()
+	.on('changeDate', function(ev) 
+	{
+		if (ev.date.valueOf() > checkout.date.valueOf()) 
+		{
+			var newDate = new Date(ev.date)
+			newDate.setDate(newDate.getDate() + 1);
+			checkout.setValue(newDate);
+		}
+		checkin.hide();
+		$('#date2')[0].focus();
+	}).data('datepicker');
+	var checkout = $('#date2').datepicker
+	({
+		onRender: function(date) 
+		{
+			return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+		}
+	}).on('changeDate', function(ev) {
+	checkout.hide();
+	}).data('datepicker');
+});*/
+    	
+</script>

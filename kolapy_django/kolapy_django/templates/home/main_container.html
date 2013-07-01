@@ -1,0 +1,46 @@
+<div class="container">
+	<div class="page-header">
+		<h1>
+			Welcome to Kolapy <br> <small>Financial Data Analysis</small>
+		</h1>
+	</div>
+
+	<div class="hero-unit">
+		<div class="row-fluid" style="width: 1100px;">
+
+
+			<div class="columnA pull-left" style="width: 300px;">
+				<form id="chartform" method="POST">
+					<table border="1">
+						<tr>
+							<td>Ticker</td>
+							<td> <input id="id_ticker" type="text"> </td>
+						</tr>
+						<tr>
+							<td>Start Date</td>
+							<td><input id="date1" type="text" value=""></td>
+						</tr>
+						<tr>
+							<td>End Date</td>
+							<td><input id="date2" type="text" value=""></td>
+						</tr>
+					</table>
+
+					{% csrf_token %} 
+					<input id="button" type="submit" value="Submit">
+				</form>
+			</div>
+
+			<div class="columnB pull-left" style="width: 800px;">
+				<div id="graphdiv" style="width: 780px; height: 350px;"></div>
+			</div>
+		</div>
+	</div>
+	<hr>
+
+	<footer> &copy Company 2013 </footer>
+
+</div>
+<!-- /container -->
+
+

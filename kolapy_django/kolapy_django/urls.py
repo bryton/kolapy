@@ -1,10 +1,13 @@
 from django.conf.urls import patterns, include, url
+from kolapy_django import views_home
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
 
 urlpatterns = patterns('',
+      url(r'^home/$', views_home.home),
+      url(r'^display/$', views_home.display),
     # Examples:
     # url(r'^$', 'kolapy_django.views.home', name='home'),
     # url(r'^kolapy_django/', include('kolapy_django.foo.urls')),

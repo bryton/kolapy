@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<!-- BASIC HEADER INFORMATION -->
+
+<meta charset="utf-8">
+<title>Kolapy</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<!-- STYLE INFORMATION  -->
+
+<link href="{{ STATIC_URL }}bootstrap/css/bootstrap.css" rel="stylesheet">                        <!-- bootstrap style sheet -->
+<link href="{{ STATIC_URL }}bootstrap/css/bootstrap-responsive.css" rel="stylesheet">             <!-- bootstrap responsive plug-in -->
+
+
+<style>
+{% include 'home/datepicker_css.html' %}
+
+body 
+{
+	padding-top: 60px;
+	/* 60px to make the container go all the way to the bottom of the topbar */
+}
+
+input[type=text]
+{
+	width: 100px;
+	height: 16px;
+}
+
+#chartform
+{
+	text-align:center;
+	font-size:0.8em;
+}
+
+</style>
+
+<!-- JAVASCRIPT INFORMATION -->
+
+<script type="text/javascript" src="{{ STATIC_URL }}bootstrap/js/bootstrap.js"></script>     <!-- Bootstrap JS -->
+<script type="text/javascript" src="{{ STATIC_URL }}dygraph-combined.js"></script>           <!-- Dygraph JS -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>        <!-- JQuery JS -->
+
+
+{% include 'home/bootstrap_js.html' %}
+{% include 'home/javascript.html' %}
+
+</head>
+
+<body>
+	<!-- NAVIGATION BAR DIVISION -->
+	{% include 'home/navbar.html' %}
+
+	<!-- MAIN CONTAINER DIVISION 
+    Includes: hero-unit for displaying visualizer on the left and input form elements on the right -->
+	{% include 'home/main_container.html' %}
+
+</body>
+</html>
