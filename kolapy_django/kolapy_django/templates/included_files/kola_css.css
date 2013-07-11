@@ -1,0 +1,98 @@
+body
+{
+	background-color: #431256;
+	position: relative;
+}
+
+header
+{
+	background-color: #431256;
+	color: #FFFFFF;
+	font-size: 200%;
+	padding-top: 25px;
+	padding-left: 40px;
+	padding-bottom: 25px;
+}
+
+input
+{
+	width: 110px;
+	text-align: center;
+}
+
+#input_block
+{
+	background-color: #FFFFFF;
+	position: absolute;
+	border: 1px solid black;
+	top: 50px;
+	left: 40px;
+	height: 400px;
+	width: 400px;
+	padding: 20px;
+}
+
+#errors
+{
+	font-size: 90%;
+	color: red;
+}
+
+#stats_block
+{
+	position: absolute;
+	top: 200px;
+	height: 100px;
+	width: 300px;
+	border: 1px solid black;
+}
+
+#graph_block
+{
+	background-color: #FFFFFF;
+	border: 1px solid black;
+	position: absolute;
+	top: 50px;
+	left: 520px;
+	height: 500px;
+	width: 900px;
+	padding: 20px;
+}
+/*
+#view4
+{
+	position: relative;
+}*/
+
+#settlement_table
+{
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	border-spacing: 0px; 
+	border-bottom: 1px solid black;
+	border-right: 1px solid black;
+}
+
+#settlement_table th, #settlement_table td
+{
+	background-color: #FFFFFF;
+	text-align: center;
+	border-left: 1px solid black;
+	border-top: 1px solid black;
+}
+
+#settlement_table th, #settlement_table td
+{
+	/*font-size: 80%;*/
+}
+
+
+
+
+
+
+
+
+
+

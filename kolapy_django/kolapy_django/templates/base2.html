@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<!-- BASIC HEADER INFORMATION -->
+
+<meta charset="utf-8">
+<title>Kolapy</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<!-- STYLE INFORMATION  -->
+
+<link type="text/css" rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"></link>
+<style> {% include "included_files/kola_css.css" %} </style>
+<style> {% include "included_files/tabcontent.css" %} </style>
+<style> {% include "included_files/jquery.datepick.css" %} </style>
+
+<!-- JAVASCRIPT INFORMATION -->
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script> {% include "included_files/dygraph-combined.js" %} </script>
+<script> {% include "included_files/javascript.js" %} </script>
+<script> {% include "included_files/tabcontent.js" %} </script>
+<script> {% include "included_files/jquery.datepick.js" %} </script>
+
+</head>
+
+
+<body>
+	<header>Welcome to Kolapy</header>
+
+	<ul class="tabs">
+		<li><a href="#view1">One Stock</a></li>
+		<li><a href="#view2">Two Stocks</a></li>
+		<li><a href="#view3">N Stocks</a></li>
+		<li><a href="#view4">Structured Settlements</a></li>
+	</ul>
+	<div class="tabcontents">
+		<div id="view1">
+			<div id="input_block">
+				<form>
+					<table>
+						<tr>
+							<td>Ticker</td>
+							<td><input id="id_ticker" type="text"></td>
+						</tr>
+						<tr>
+							<td>Start Date</td>
+							<td><input id="date1" class="date" type="text" value=""></td>
+						</tr>
+						<tr>
+							<td>End Date</td>
+							<td><input id="date2" class="date" type="text" value=""></td>
+						</tr>
+					</table>
+					<div id="errors"></div>
+					{% csrf_token %} 
+					<input id="ticker_button" type="submit" value="Submit">
+				</form>
+				
+				<div id="stats_block">
+					Statistical Summary <br>
+					<div id="stats"></div>
+				</div>
+				
+			</div>
+
+
+			<div id="graph_block">
+				<div id="graphdiv" style="width: 830px; height: 300px;"></div>
+				<br>
+				<br>
+				<div id="graphdiv2" style="width: 830px; height: 100px;"></div>
+				<p>
+					<b>Display: </b> 
+					<input type=checkbox id="0" checked> <label for="0">Price</label> 
+					<input type=checkbox id="1" checked> <label for="1">PnL</label>
+				</p>
+			</div>
+		</div>
+		<div id="view2">content 2</div>
+		<div id="view3">content 3</div>
+		<div id="view4">
+			<table id="settlement_table">
+				<tr>
+					<th>Start Date</th>
+					<th>End Date</th>
+					<th>
+					Monthly <br>
+					Payment
+					</th>
+					<th>
+					Number of <br>
+					Payments
+					</th>
+					<th>Price</th>
+				</tr>
+				<tr>
+					<form id="settlement_form">
+						<td><input id="settlement_start" class="date" type="text" value=""></td> <br>
+						<td><input id="settlement_end" class="date" type="text" value=""></td> <br>
+						<td><input id="monthly_payment" type="text"></td> <br>
+						<td><input id="number_of_payments" type="text"></td> <br>
+						<td><input id="settlement_button" type="submit" value="Submit"></td>
+					</form>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+
+
+</body>
+
+</html>
