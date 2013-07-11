@@ -8,6 +8,8 @@ from kolapy_django import views_home
 urlpatterns = patterns('',
       url(r'^home/$', views_home.home),
       url(r'^display/$', views_home.display),
+      url(r'^tickers/$', views_home.tickers),
+      url(r'^settlement/$', views_home.settlement)
     # Examples:
     # url(r'^$', 'kolapy_django.views.home', name='home'),
     # url(r'^kolapy_django/', include('kolapy_django.foo.urls')),

@@ -1,23 +1,40 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from kolapy_django.forms import StockForm
-import datetime as dt
+import data_analysis2
+import fixed_income
+import json
+import os.path
 
-
-
-from kolapy_django import data_analysis
+last_analysis = None
 
 def home(request):
-    csv = data_analysis.data_to_csv('MSFT')
-    form = StockForm()
-    return render(request, 'home/base.html', {'form': form, 'csv': csv})
+    global last_analysis
+    last_analysis = data_analysis2.data_analysis('MSFT', False)
+    summary = last_analysis.full_summary('MSFT', '01/01/2008', '01/01/2013', True)
+    csv = summary['csv']
+    return render(request, 'base2.html', {'price_csv': csv['price_csv'],
+                                          'pnl_csv': csv['pnl_csv']})
 
 def display(request):
-    val = data_analysis.csv(str(request.POST['ticker']))
-    response = HttpResponse(mimetype='text/csv')
-    response['Content-Disposition'] = 'attachment; filename=somefilename.csv'
-    response.write(val)
-    return response
-    
+    global last_analysis
+    ticker = str(request.POST.get('ticker'))
+    if not last_analysis.ticker == ticker:
+        last_analysis = data_analysis2.data_analysis(ticker, True)
+    response_data = last_analysis.full_summary(ticker, str(request.POST['start']), str(request.POST['end']), False)
+    return HttpResponse(json.dumps(response_data), content_type="application/json")
+
+def tickers(request):
+    tickers_file = os.path.join(os.path.dirname(__file__), 'symbols.txt').replace('\\', '/')
+    tickers = open(tickers_file).read()
+    return HttpResponse(tickers, mimetype='text/csv')
+
+def settlement(request):
+    amount = float(str(request.GET.get('amount')))
+    N = int(str(request.GET.get('N')))
+    start = str(request.GET.get('start'))
+    end = str(request.GET.get('end'))
+    response_data = fixed_income.fixed_income_price(amount, N, start, end)
+    return HttpResponse(json.dumps(response_data), content_type="application/json")
+
 
 
