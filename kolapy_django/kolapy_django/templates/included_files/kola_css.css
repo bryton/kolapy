@@ -20,16 +20,29 @@ input
 	text-align: center;
 }
 
-#input_block
+.input_block
 {
 	background-color: #FFFFFF;
 	position: absolute;
 	border: 1px solid black;
-	top: 50px;
-	left: 40px;
-	height: 400px;
-	width: 400px;
 	padding: 20px;
+}
+
+.graph_block
+{
+	background-color: #FFFFFF;
+	border: 1px solid black;
+	position: absolute;
+}
+
+/* The following style sheet selection is for view 1 -- one stock view */
+#view1 .input_block
+{
+	
+	top: 10px;
+	left: 40px;
+	height: 630px;
+	width: 400px;
 }
 
 #errors
@@ -40,30 +53,39 @@ input
 
 #stats_block
 {
-	position: absolute;
-	top: 200px;
 	height: 100px;
 	width: 300px;
 	border: 1px solid black;
 }
 
-#graph_block
+#view1 .graph_block
 {
-	background-color: #FFFFFF;
-	border: 1px solid black;
-	position: absolute;
-	top: 50px;
+
+	top: 10px;
 	left: 520px;
-	height: 500px;
 	width: 900px;
 	padding: 20px;
 }
-/*
-#view4
-{
-	position: relative;
-}*/
 
+/*The following style sheet selection is for veiw 2 -- multiple stock view */
+
+#view2 .input_block
+{
+	top: 10px;
+	left: 40px;
+	width: 400px;
+	height: 400px;
+}
+
+#view2 .graph_block
+{
+	top: 10px;
+	left: 520px;
+	width: 900px;
+	padding: 20px;
+}
+
+/* The following style sheet selection is for view 4 -- structured settlements */
 #settlement_table
 {
 	position: absolute;

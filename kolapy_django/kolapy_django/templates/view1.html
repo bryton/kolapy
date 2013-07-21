@@ -1,0 +1,68 @@
+<div id="view1">
+	<div class="input_block">
+	
+		<!-- Basic ticker and date range information form -->
+		<form>
+			<table>
+				<tr>
+					<td>Ticker</td>
+					<td><input id="id_ticker" type="text" value="MSFT"></td>
+				</tr>
+				<tr>
+					<td>Start Date</td>
+					<td><input id="date1" class="date" type="text" value="03/13/1986"></td>
+				</tr>
+				<tr>
+					<td>End Date</td>
+					<td><input id="date2" class="date" type="text" value="07/11/2013"></td>
+				</tr>
+			</table>
+			<div id="errors"></div>
+			{% csrf_token %} 
+			<input id="options_button_view1" type="submit" value="Submit">
+		</form>
+		
+		<!-- Momentum input form -->
+		<form>
+			<table>
+				<tr>
+					<td>Minimum Increase</td>
+					<td><input id="min_increase" type="text"></td>
+				</tr>
+				<tr>
+					<td>N</td>
+					<td><input id="N_consecutive_days" type="text"></td>
+				</tr>
+				<tr>
+					<td>D</td>
+					<td><input id="D_days_after" type="text"></td>
+				</tr>
+				<tr>
+					<td>Shares</td>
+					<td><input id="number_of_shares" type="text"></td>
+				</tr>
+			</table>
+			{% csrf_token %} 
+			<input id="momentum_button" type="submit" value="Submit">
+		</form>
+		<br>
+
+		<div id="stats_block">
+			Statistical Summary of Returns<br>
+			<div id="stats"></div>
+		</div>
+
+	</div>
+
+
+	<div class="graph_block">
+		<div id="graph_price" style="width: 830px;"></div>
+		<br>
+		<div id="graph_pnl" style="width: 830px;"></div>
+		<p>
+			<b>Display: </b> <input type=checkbox id="0" checked> <label
+				for="0">Price</label> <input type=checkbox id="1" checked> <label
+				for="1">PnL</label>
+		</p>
+	</div>
+</div>

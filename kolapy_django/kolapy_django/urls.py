@@ -6,9 +6,13 @@ from kolapy_django import views_home
 # admin.autodiscover()
 
 urlpatterns = patterns('',
+      url(r'^$', views_home.home),                  
       url(r'^home/$', views_home.home),
-      url(r'^display/$', views_home.display),
-      url(r'^tickers/$', views_home.tickers),
+      url(r'^googlefinanceapi', views_home.google_finance_api),
+      url(r'^display1/$', views_home.display_view1),
+      url(r'^momentum/$', views_home.momentum),
+      url(r'^display2/$', views_home.display_view2),
+      url(r'^cointegrate/$', views_home.cointegration),
       url(r'^settlement/$', views_home.settlement)
     # Examples:
     # url(r'^$', 'kolapy_django.views.home', name='home'),

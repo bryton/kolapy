@@ -13,7 +13,7 @@ ul.tabs li
 {
     display: inline;
     margin: 0;
-    margin-right:-4px; /*distance between tabs*/
+    margin-right:3px; /*distance between tabs*/
 }
         
 ul.tabs li a
@@ -26,7 +26,7 @@ ul.tabs li a
     border-bottom-color:#B7B7B7;
     color: #000;
     background: #F0F0F0 url(tabbg.gif) 0 0 repeat-x;
-    border-radius: 10px 10px 0 0;
+    border-radius: 3px 3px 0 0;
     outline:none;
 }
         
@@ -38,7 +38,7 @@ ul.tabs li a:visited
 ul.tabs li a:hover
 {
     border: 1px solid #B7B7B7;
-    background:#F0F0F0 url(tabbg.gif)  0 -36px repeat-x;
+    background:#F0F0F0 url(tabbg.gif) 0 -36px repeat-x;
 }
         
 ul.tabs li.selected a, ul.tabs li.selected a:hover
@@ -60,11 +60,7 @@ ul.tabs li.selected a:hover
 
 div.tabcontents
 {
-	position: relative;
-	top: -10px;
-    border: 1px solid #B7B7B7; 
-    padding: 30px;
-    background-color:#F6E8F7;
+    border: 1px solid #B7B7B7; padding: 30px;
+    background-color:#FFF;
     border-radius: 0 3px 3px 3px;
-    height: 750px;
 }
