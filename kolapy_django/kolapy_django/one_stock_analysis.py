@@ -19,7 +19,6 @@ class one_stock_analysis:
         selection = da.selection(self.df['Adj_Close'], start, end)
         selection_spy = da.selection(self.df_spy['Adj_Close'], start, end)
         returns = selection.pct_change()
-        print returns
         returns_spy = selection_spy.pct_change()
         beta = returns.cov(returns_spy)/returns_spy.var()
         return {'mean': returns.mean(), 'stdev': returns.std(), 'beta': beta}
@@ -31,7 +30,8 @@ class one_stock_analysis:
             self.__init__(ticker, True)
         csv = {'price_csv' : self.price_csv, 'pnl_csv' : self.pnl_csv}
         stats = self.summary_stats(start, end)
-        return {'csv' : csv , 'stats' : stats}
+        name = da.name(self.ticker)
+        return {'csv' : csv , 'stats' : stats, 'name' : name}
     
 #---------------------------------------------------------------------------------------   
 
@@ -40,9 +40,9 @@ class one_stock_analysis:
 # date and the number of shares involved in the transaction (by performing a trade "on" a date,
 # we mean at the time the market opens on that date). 
 
-# This algorithm is as follows: 
+# The momentum algorithm is as follows: 
     
-    def momentum(self, prices, start, end, minIncrease, N, D, shares):
+    def momentum(self, prices, minIncrease, N, D, shares):
         signals = np.zeros(len(prices))
         signals = pd.Series(signals, index=prices.index)
         returns = prices.pct_change()
@@ -59,7 +59,13 @@ class one_stock_analysis:
                 run = 1
             
         return signals
-                
+   
+#---------------------------------------------------------------------------------------       
+    
+    def custom(self,code):
+        exec code
+
+
         
         
         

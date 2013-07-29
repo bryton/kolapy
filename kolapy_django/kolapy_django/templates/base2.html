@@ -12,7 +12,7 @@
 
 <!-- STYLE INFORMATION  -->
 
-<link type="text/css" rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"></link>
+<style> {% include "included_files/fundamental/jqueryui.css" %} </style>
 <style> {% include "included_files/kola_css2.css" %} </style>
 <style> {% include "included_files/fundamental/tabcontent.css" %} </style>
 <style> {% include "included_files/fundamental/jquery.datepick.css" %} </style>
@@ -20,16 +20,17 @@
 
 <!-- JAVASCRIPT INFORMATION -->
 
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+<script> {% include "included_files/fundamental/jqueryui.js" %} </script>
 <script> {% include "included_files/fundamental/dygraph-combined.js" %} </script>
 <script> {% include "included_files/view1_js.js" %} </script>
-<script> {% include "included_files/view2_js.js" %} </script>
+<!-- <script> {% include "included_files/view2_js.js" %} </script> -->
 <script> {% include "included_files/fundamental/tabcontent.js" %} </script>
 <script> {% include "included_files/fundamental/jquery.datepick.js" %} </script>
 <script> {% include "included_files/fundamental/codemirror.js" %} </script>
 <script> {% include "included_files/fundamental/python.js" %} </script>
 <script> {% include "included_files/fundamental/matchbrackets.js" %} </script>
+<script> {% include "included_files/tabs.js" %} </script>
 
 </head>
 
@@ -37,17 +38,20 @@
 <body>
 	<header>Welcome to Kolapy</header>
 
-	<ul class="tabs">
-		<li><a href="#view1">One Stock</a></li>
-		<li><a href="#view2">Two Stocks</a></li>
-		<li><a href="#view3">N Stocks</a></li>
-		<li><a href="#view4">Structured Settlements</a></li>
-	</ul>
-	<div id="kolapy_tabs" class="tabcontents">
+	<button id="add_tab">Add Tab</button>
+
+	<div id="tabs">
+		<ul>
+			<li><a href="#view1">View 1</a> <span class="ui-icon ui-icon-close" role="presentation">Remove Tab</span></li>
+			<!-- <li><a href="#view2">Two Stocks</a></li> -->
+			<!-- <li><a href="#view3">N Stocks</a></li> -->
+			<!-- <li><a href="#view4">Structured Settlements</a></li> -->
+		</ul>
+		
 		{% include "view1_2.html" %}
-		{% include "view2.html" %}
-		<div id="view3">content 3</div>
-		{% include "view4.html" %}
+		<!-- {% include "view2.html" %} -->
+		<!-- <div id="view3">content 3</div> -->
+		<!-- {% include "view4.html" %} -->
 	</div>
 
 </body>

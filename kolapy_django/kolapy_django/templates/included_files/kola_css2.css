@@ -1,14 +1,12 @@
 body
 {
-	background-color: #431256;
+	background-color: #F6E8F7;
 	position: relative;
-	font-size: 85%;
+	font-size: 90%;
 }
 
 header
 {
-	background-color: #431256;
-	color: #FFFFFF;
 	font-size: 200%;
 	padding-top: 25px;
 	padding-left: 40px;
@@ -21,28 +19,40 @@ input
 	text-align: center;
 }
 
-.input_block
+/* The following style sheet selection is for view 1 -- one stock view */
+
+
+#stats_block
 {
 	background-color: #FFFFFF;
-	position: absolute;
+	display: inline-block;
+	vertical-align: top;
+	height: 485px;
+	width: 400px;
+	padding: 10px;
 	border: 1px solid black;
+}
+
+#view1_graph_block
+{
+	background-color: #FFFFFF;
+	border: 1px solid black;
+	display: inline-block;
+	vertical-align: top;
+	width: 800px;
 	padding: 20px;
 }
 
-.graph_block
+#input_block
 {
 	background-color: #FFFFFF;
 	border: 1px solid black;
-	position: absolute;
-}
-
-/* The following style sheet selection is for view 1 -- one stock view */
-#view1 .input_block
-{
-	
-	top: 10px;
-	left: 40px;
+	padding: 10px;
+	display: inline-block;
+	vertical-align: top;
 	width: 400px;
+	height: 280px;
+	margin-top: 4px;
 }
 
 #errors
@@ -51,39 +61,13 @@ input
 	color: red;
 }
 
-#stats_block
-{
-	height: 100px;
-	width: 300px;
-	border: 1px solid black;
-}
-
-#view1 .graph_block
-{
-
-	top: 10px;
-	left: 520px;
-	width: 900px;
-	padding: 20px;
-}
-
-#view1 .algorithm_block
-{
-	position: absolute;
-	background-color: #FFFFFF;
-	border: 1px solid black;
-	top: 600px;
-	left: 40px;
-	right: 40px;
-	height: 400px;
-	padding: 20px;
-}
 
 #code_block
 {
-	width: 900px;
-	margin-left: auto;
-	margin-right: 0px;
+	display: inline-block;
+	vertical-align: top;
+	width: 842px;
+	margin-top: 4px;
 }
 
 .CodeMirror
@@ -91,7 +75,8 @@ input
 	border: 1px solid black;
 }
 
-/*The following style sheet selection is for veiw 2 -- multiple stock view */
+
+/*The following style sheet selection is for view 2 -- multiple stock view */
 
 #view2 .input_block
 {
@@ -103,6 +88,8 @@ input
 
 #view2 .graph_block
 {
+	background-color: #FFFFFF;
+	border: 1px solid black;
 	top: 10px;
 	left: 520px;
 	width: 900px;

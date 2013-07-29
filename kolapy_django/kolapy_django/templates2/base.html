@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<!-- BASIC HEADER INFORMATION -->
+
+<meta charset="utf-8">
+<title>Kolapy</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<!-- STYLE INFORMATION  -->
+
+<style> {% include "included_files/fundamental/jqueryui.css" %} </style>
+<style> {% include "included_files/kola_css.css" %} </style>
+<style> {% include "included_files/fundamental/tabcontent.css" %} </style>
+<style> {% include "included_files/fundamental/jquery.datepick.css" %} </style>
+<style> {% include "included_files/fundamental/codemirror.css" %} </style>
+
+<!-- JAVASCRIPT INFORMATION -->
+
+<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+<script> {% include "included_files/fundamental/jqueryui.js" %} </script>
+<script> {% include "included_files/fundamental/dygraph-combined.js" %} </script>
+<script> {% include "included_files/fundamental/tabcontent.js" %} </script>
+<script> {% include "included_files/fundamental/jquery.datepick.js" %} </script>
+<script> {% include "included_files/fundamental/codemirror.js" %} </script>
+<script> {% include "included_files/fundamental/python.js" %} </script>
+<script> {% include "included_files/fundamental/matchbrackets.js" %} </script>
+
+<script>
+$(document).ready(function() 
+{
+	{% include "included_files/tabs.js" %}
+	{% include "included_files/view1_js.js" %}
+});
+</script>
+
+</head>
+
+
+<body>
+	<header>Welcome to Kolapy</header>
+
+	<button id="add_tab">Add Tab</button>
+	<input id="test" type="submit" value="test">
+	
+	<div id="tabs">
+		<ul>
+			<li><a href="#tab0">Tab 1</a> <span class="ui-icon ui-icon-close" role="presentation">Remove Tab</span></li>
+		</ul>
+
+		<div id="tab0">
+			<div class="c0 stats_block">
+				<h3>Microsoft Corporation</h3>
+				<table border="1">
+					<tr>
+						<th colspan="2">Statical Summary</th>
+					</tr>
+					<tr>
+						<td>Mean</td>
+						<td name="mean">0.0011984</td>
+					</tr>
+					<tr>
+						<td>Standard Deviation</td>
+						<td name="stdev">0.024167</td>
+					</tr>
+					<tr>
+						<td>Beta</td>
+						<td name="beta">1.0627</td>
+					</tr>
+				</table>
+			</div>
+
+			<div class="c0 view1_graph_block">
+				<div id="graph_price0" class="c0 graph_price"></div>
+				<br>
+				<div id="graph_pnl0" class="c0 graph_pnl"></div>
+			</div>
+			<br>
+
+
+			<!-- Basic ticker and date range information form -->
+			<div class="c0 input_block">
+				<form>
+					<table>
+						<tr>
+							<td>Ticker</td>
+							<td><input class="c0 id_ticker" type="text" value="MSFT"></td>
+						</tr>
+						<tr>
+							<td>Start Date</td>
+							<td><input class="c0 date1" class="date" type="text"
+								value="03/13/1986"></td>
+						</tr>
+						<tr>
+							<td>End Date</td>
+							<td><input class="c0 date2" class="date" type="text"
+								value="07/11/2013"></td>
+						</tr>
+						<tr>
+							<td>Algorithm</td>
+							<td><select>
+									<option value="momentum">Momentum</option>
+									<option value="custom">Custom</option>
+							</select></td>
+						</tr>
+					</table>
+					<div class="c0 errors"></div>
+				</form>
+			</div>
+
+			<div class="c0 code_block">
+				<form>
+					<textarea class="c0 code" id="code0"></textarea>
+					<input class="c0 algorithm_button" type="submit" value="Run">
+				</form>
+			</div>
+		</div>
+		
+	</div>
+
+</body>
+
+</html>

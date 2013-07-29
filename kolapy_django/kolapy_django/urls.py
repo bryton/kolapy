@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 from kolapy_django import views_home
+from kolapy_django import views_html
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -10,10 +11,11 @@ urlpatterns = patterns('',
       url(r'^home/$', views_home.home),
       url(r'^googlefinanceapi', views_home.google_finance_api),
       url(r'^display1/$', views_home.display_view1),
-      url(r'^momentum/$', views_home.momentum),
+      url(r'^algorithm/$', views_home.algorithm),
       url(r'^display2/$', views_home.display_view2),
       url(r'^cointegrate/$', views_home.cointegration),
-      url(r'^settlement/$', views_home.settlement)
+      url(r'^settlement/$', views_home.settlement),
+      url(r'^addtab/$', views_html.load_tab)
     # Examples:
     # url(r'^$', 'kolapy_django.views.home', name='home'),
     # url(r'^kolapy_django/', include('kolapy_django.foo.urls')),

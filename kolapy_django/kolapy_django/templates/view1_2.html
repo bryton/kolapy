@@ -1,0 +1,79 @@
+<div id="view1">
+
+	<!-- <div id="bg_container"> -->
+
+		<div id="stats_block">
+			<h3>Microsoft Corporation</h3>
+			<table border="1">
+				<tr>
+					<th colspan="2">Statical Summary</th>
+				</tr>
+				<tr>
+					<td>Mean</td>
+					<td name="mean">0.0011984</td>
+				</tr>
+				<tr>
+					<td>Standard Deviation</td>
+					<td name="stdev">0.024167</td>
+				</tr>
+				<tr>
+					<td>Beta</td>
+					<td name="beta">1.0627</td>
+				</tr>
+			</table>
+		</div>
+
+		<div id="view1_graph_block">
+			<div id="graph_price"></div>
+			<br>
+			<div id="graph_pnl"></div>
+			<p>
+				<b>Display: </b> <input type=checkbox id="0" checked> <label
+					for="0">Price</label> <input type=checkbox id="1" checked>
+				<label for="1">PnL</label>
+			</p>
+		</div>
+
+
+		<!-- Basic ticker and date range information form -->
+		<div id="input_block">
+			<form>
+				<table>
+					<tr>
+						<td>Ticker</td>
+						<td><input id="id_ticker" type="text" value="MSFT"></td>
+					</tr>
+					<tr>
+						<td>Start Date</td>
+						<td><input id="date1" class="date" type="text"
+							value="03/13/1986"></td>
+					</tr>
+					<tr>
+						<td>End Date</td>
+						<td><input id="date2" class="date" type="text"
+							value="07/11/2013"></td>
+					</tr>
+					<tr>
+						<td>Algorithm</td>
+						<td><select>
+								<option value="momentum">Momentum</option>
+								<option value="custom">Custom</option>
+						</select></td>
+					</tr>
+				</table>
+				<div id="errors"></div>
+				{% csrf_token %}
+			</form>
+		</div>
+
+
+		<div id="code_block">
+			<form>
+				<textarea id="code" name="code"></textarea>
+				<input id="algorithm_button" type="submit" value="Run">
+			</form>
+		</div>
+	</div>
+
+
+

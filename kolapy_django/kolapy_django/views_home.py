@@ -10,12 +10,6 @@ import urllib2
 last_osa = None
 last_tsa = None
 
-import datetime as dt
-
-def home2(request):
-    print 'hello'
-    return HttpResponse("hi")
-
 #---------------------------------------------------------------------------------------   
 
 def home(request):
@@ -46,7 +40,6 @@ def google_finance_api(request):
     return HttpResponse(response_data, content_type="application/json")
     
 #---------------------------------------------------------------------------------------    
-
                                         
 def display_view1(request):
     global last_osa
@@ -58,20 +51,19 @@ def display_view1(request):
 
 #---------------------------------------------------------------------------------------  
 
-def momentum(request):
-    global last_osa
+def algorithm(request):
     ticker = str(request.POST.get('ticker'))
     start = str(request.POST.get('start'))
     end = str(request.POST.get('end'))
-    minIncrease = float(str(request.POST.get('minIncrease')))
-    N = int(str(request.POST.get('N')))
-    D = int(str(request.POST.get('D')))
-    shares = int(str(request.POST.get('shares')))
-    backtester = bt.backtester(last_osa.momentum, ticker, start, end, minIncrease, N, D, shares)
-    response_data = backtester.csv()
+    code = str(request.POST.get('code')) 
+    print code
+    exec code
+    
+    backtester = bt.backtester(strategy, ticker, start, end)
+    response_data = backtester.full_summary()
     return HttpResponse(json.dumps(response_data), content_type="application/json")
 
-#--------------------------------------------------------------------------------------- 
+#---------------------------------------------------------------------------------------   
 
 def display_view2(request):
     global last_tsa

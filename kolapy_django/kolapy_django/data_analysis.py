@@ -4,15 +4,20 @@ import numpy as np
 from pymongo import MongoClient
 client = MongoClient()
 db = client.kolapy
-collection = db.daily
 import datetime as dt
 import StringIO
 
 def dataframe(ticker):
-    global collection
+    global db
+    collection = db.daily
     df = pd.DataFrame(list(collection.find({'Symbol' : ticker})))
     df.index = pd.to_datetime(df['Date'])
     return df
+
+def name(ticker):
+    global db
+    collection = db.tickernames
+    return str(collection.find_one({'Symbol' : ticker})['Name'])
 
 def csv(series, json):
     if json:

@@ -1,17 +1,12 @@
 $(document).ready(function() 
 {
-	// initialize graph 1 with all necessary options
-	
-	/*var current_ticker = "MSFT";
-	var current_start_date = "init";
-	var current_end_date = "init";*/
-			
+
 	var blockRedraw = false;
 			
 	g = new Dygraph(document.getElementById("graph_price"),
 	"{{ price_csv }}",
 	{
-		height: 250,
+		height: 200,
 		labels: ["Date", "Price"],
 		fillGraph: true,
 		highlightCallback: function(e, x, pts, row) 
@@ -78,9 +73,10 @@ $(document).ready(function()
 		interactionModel: Dygraph.Interaction.defaultModel
 			
 	}); // end of g2 initialization
+	
 			
 	var zeropad = Dygraph.zeropad;
-	$("#view1 .graph_block").mouseup(function()
+	$("#view1 .graph_block").on("mouseup dblclick", function()
 	{
 		var ticker = $("#id_ticker").val();
 		var range = g.xAxisRange();
@@ -115,27 +111,26 @@ $(document).ready(function()
 			},
 			success : function(received_data) 
 			{
-				$("#stats").html(
-					"mean: " + received_data.stats.mean + "<br>"
-					+ "stdev: " + received_data.stats.stdev + "<br>"
-					+ "beta: " + received_data.stats.beta + "<br>");
-			},
+				$('[name="mean"]').html(received_data.stats.mean.toPrecision(5));
+				$('[name="stdev"]').html(received_data.stats.stdev.toPrecision(5));
+				$('[name="beta"]').html(received_data.stats.beta.toPrecision(5));
+			}/*,
 			error : function(xhr, errmsg, err) 
 			{
 				alert(xhr.status + ": errmsg = " + errmsg + ": " + xhr.responseText);
-			}
+			}*/
 		});
 	});
 			
-	// initialize date-pickers 
+	/* initialize date-pickers 
 	$(".date").datepick(
 	{
 		showOnFocus: false,
 		showTrigger: '<img src="http://jqueryui.com/resources/demos/datepicker/images/calendar.gif">',
-	});
+	});*/
 			
 	// stock form submission
-	$("#options_button_view1").click(function()
+	$("#id_ticker, #date1, #date2").blur(function()
 	{
 		$("#errors").html("");
 		var ticker = $("#id_ticker").val();
@@ -143,7 +138,7 @@ $(document).ready(function()
 		var input_enddate = $("#date2").val();
 		var start;
 		var end;
-
+		
 		// form validation
 		if (!ticker)
 		{
@@ -186,60 +181,47 @@ $(document).ready(function()
 					file : received_data.csv.price_csv,
 					dateWindow : [start,end ]
 				});
-				$("#stats").html
-				(
-					"mean: " + received_data.stats.mean + "<br>"
-					+ "stdev: " + received_data.stats.stdev + "<br>"
-					+ "beta: " + received_data.stats.beta + "<br>");
-			},
+				$('[name="mean"]').html(received_data.stats.mean.toPrecision(5));
+				$('[name="stdev"]').html(received_data.stats.stdev.toPrecision(5));
+				$('[name="beta"]').html(received_data.stats.beta.toPrecision(5));
+				$("#stats_block h3").html(received_data.name);
+			}/*,
 			error : function(xhr, errmsg, err) {
 				alert(xhr.status + ": errmsg = " + errmsg
 				+ ": " + xhr.responseText);
-			}
-		});
-		
-		$.ajax({
-			url : "/googlefinanceapi/",
-			type : "POST", 
-			data : {
-				ticker : ticker,
-				csrfmiddlewaretoken : '{{ csrf_token }}'
-			},
-			success : function(received_data) {
-				alert(received_data);
-			}, 
-			error : function(xhr, errmsg, err) {
-				alert(xhr.status + ": errmsg = " + errmsg
-				+ ": " + xhr.responseText);
-			},
+			}*/
 		});
 						
 		return false;
 	}); // end stock form submission
 	
 	
-	// momentum form submission
-	$("#momentum_button").click(function()
+	var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+        mode: {name: "python",
+               version: 2,
+               singleLineStringErrors: false},
+        lineNumbers: true,
+        indentUnit: 4,
+        tabMode: "shift",
+        matchBrackets: true
+    });
+	
+	// Algorithm button function (Run)
+	$("#algorithm_button").click(function()
 	{
+		
 		var ticker = $("#id_ticker").val();
 		var start = $("#date1").val();
 		var end = $("#date2").val();
-		var minIncrease = $("#min_increase").val();
-		var N = $("#N_consecutive_days").val();
-		var D = $("#D_days_after").val();
-		var shares = $("#number_of_shares").val();
-		
+		var code = editor.getValue();
 		$.ajax({
-			url : "/momentum/",
+			url : "/algorithm/",
 			type : "POST",
 			data : {
 				ticker : ticker,
 				start : start,
 				end : end,
-				minIncrease : minIncrease,
-				N : N,
-				D : D,
-				shares : shares,
+				code : code,
 				csrfmiddlewaretoken : '{{ csrf_token }}'
 			},
 			success : function(received_data)
@@ -253,55 +235,11 @@ $(document).ready(function()
 				+ ": " + xhr.responseText);
 			}
 		});
-		return false;
-		
-	});
+		return false;	
+	}); // end algorithm button click (Run)
 	
+
 	
-			
-	$(":checkbox").click(function()
-	{
-		if ($("#0").is(":checked") && $("#1").is(":checked"))
-		{
-			$("#graph_price").show();
-			$("#graph_price").height(350);
-			g.resize();
-			g.updateOptions({showRangeSelector: false});
-					
-			$("#graph_pnl").show();
-			$("#graph_pnl").height(200);
-			g2.resize();
-		}
-		else if ($("#0").is(":checked") && !($("#1").is(":checked")))
-		{
-			$("#graph_price").show();
-			$("#graph_price").height(500);
-			g.resize();
-			g.updateOptions({
-				showRangeSelector: true, 
-				rangeSelectorPlotStrokeColor: "white",
-				rangeSelectorPlotFillColor: "white", 
-				interactionModel: Dygraph.Interaction.defaultModel
-			});
-					
-			$("#graph_pnl").hide();
-		}
-		else if (!($("#0").is(":checked")) && $("#1").is(":checked"))
-		{
-			$("#graph_price").hide();
-					
-			$("#graph_pnl").show();
-			$("#graph_pnl").height(500);
-			g2.resize();
-					
-		}
-		else 
-		{
-			$("#graph_price").hide();
-			$("#graph_pnl").hide();
-		}
-				
-	});
 			
 	$("#settlement_button").click(function()
 	{
