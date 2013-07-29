@@ -1,8 +1,8 @@
 var tabTemplate = "<li><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-close' role='presentation'></span></li>"
-tabCounter = 1;
+tabCounter = 0;
+tabListLength = 0;
 
-
-var tabs = $("#tabs").tabs()
+var tabs = $("#tabs").tabs();
 
 tabs.find(".ui-tabs-nav").sortable({
 	axis : "x",
@@ -10,34 +10,13 @@ tabs.find(".ui-tabs-nav").sortable({
 		tabs.tabs("refresh");
 	}
 });
-/*
-$("#add_tab").click(function() {
-	dialog.dialog("open");
-});
 
-
-var dialog = $("#dialog").dialog({
-	autoOpen : false,
-	modal : true,
-	buttons : {
-		Add : function() {
-			addTab();
-			$(this).dialog("close");
-		},
-		Cancel : function() {
-			$(this).dialog("close");
-		}
-	},
-	close : function() {
-		form[0].reset();
-	}
-});
-*/
 
 $("#add_tab").click(function() {
+	tabCounter++;
+	tabListLength++;
 	var id = "tab" + tabCounter;
-	var label = "Tab " + (tabCounter + 1);
-	var li = $(tabTemplate.replace(/#\{href\}/g, "#" + id).replace(/#\{label\}/g, label));
+	var li = $(tabTemplate.replace(/#\{href\}/g, "#" + id).replace(/#\{label\}/g, "New Tab"));
 	tabs.find(".ui-tabs-nav").append(li);
 
 	
@@ -51,7 +30,7 @@ $("#add_tab").click(function() {
 		success : function(received_data) {
 			tabs.append("<div id='" + id + "'>" + received_data.html + "</div>");
 			tabs.tabs("refresh");
-			$( "#tabs" ).tabs( "option", "active", tabCounter );
+			$( "#tabs" ).tabs("option", "active", tabListLength);
 			
 		},
 		error : function(xhr, errmsg, err) {
@@ -59,14 +38,39 @@ $("#add_tab").click(function() {
 		}
 
 	});
-
+	dialog.dialog("open");
+	
 });
+
+
+var dialog = $("#dialog").dialog({
+	autoOpen : false,
+	modal : true,
+	buttons : {
+		Add : function() {
+			makeInteractive();
+			$(this).dialog("close");
+		},
+
+	},
+	close : function() {
+		form[0].reset();
+	}
+});
+
+var form = dialog.find("form").submit(function(event) {
+	makeInteractive();
+	dialog.dialog("close");
+	event.preventDefault();
+});
+
 
 // make tabs closable
 tabs.delegate("span.ui-icon-close", "click", function() {
 	var panelId = $(this).closest("li").remove().attr("aria-controls");
 	$("#" + panelId).remove();
 	tabs.tabs("refresh");
+	tabListLength--;
 });
 
 $(document).on("mousemove", ".view1_graph_block", function() 
@@ -75,7 +79,7 @@ $(document).on("mousemove", ".view1_graph_block", function()
 });
 
 
-$("#test").click(function()
+function makeInteractive()
 {	
 	g_price[tabCounter] = 
 		new Dygraph(document.getElementById('graph_price' + tabCounter), '{{ price_csv }}', 
@@ -163,8 +167,9 @@ $("#test").click(function()
 			tabMode : "shift",
 			matchBrackets : true
 		});
-	tabCounter++;
-});
+	
+	$("#tabs ul:first li:eq(" + tabListLength + ") a").text($("#tab_title").val());
+}
 
 
 

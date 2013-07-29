@@ -6,7 +6,10 @@ client = MongoClient()
 db = client.kolapy
 import datetime as dt
 import StringIO
+import re
 
+
+# get pandas dataframe from ticker
 def dataframe(ticker):
     global db
     collection = db.daily
@@ -14,10 +17,20 @@ def dataframe(ticker):
     df.index = pd.to_datetime(df['Date'])
     return df
 
+# get full name of company from ticker
 def name(ticker):
     global db
     collection = db.tickernames
     return str(collection.find_one({'Symbol' : ticker})['Name'])
+
+# get typeahead options from term
+def typeahead(term):
+    global db
+    collection = db.tickernames
+    regx = '^' + term + '.*'
+    regx = re.compile(regx, re.IGNORECASE)
+    data = list(collection.find({'Symbol' : regx}, {'_id' : False}))
+    return data
 
 def csv(series, json):
     if json:

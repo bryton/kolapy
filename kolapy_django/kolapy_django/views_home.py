@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+import data_analysis as da
 import one_stock_analysis as osa
 import two_stock_analysis as tsa
 import backtester as bt
@@ -15,10 +16,10 @@ last_tsa = None
 def home(request):
     global last_osa
     global last_tsa
-    last_osa = osa.one_stock_analysis('MSFT', False)
+    last_osa = osa.one_stock_analysis('AAPL', False)
     last_tsa = tsa.two_stock_analysis('SCHD', 'SCHB', False)
-    summary_osa = last_osa.full_summary('MSFT', '01/01/2008', '01/01/2013', True)
-    summary_tsa = last_tsa.full_summary('SCHD', 'SCHB', '01/01/2008', '01/01/2013', True)
+    summary_osa = last_osa.full_summary('AAPL', '01/01/2008', '01/01/2013', True)
+    summary_tsa = last_tsa.full_summary('AAPL', 'AA', '01/01/2008', '01/01/2013', True)
     csv_osa = summary_osa['csv']
     csv_tsa = summary_tsa['csv']
     return render(request, 'base.html', {'price_csv': csv_osa['price_csv'],
@@ -39,6 +40,12 @@ def google_finance_api(request):
     response_data = json.loads(content[3:])
     return HttpResponse(response_data, content_type="application/json")
     
+#---------------------------------------------------------------------------------------    
+
+def typeahead(request):
+    term = str(request.GET.get("term"))
+    response_data = da.typeahead(term)
+    return HttpResponse(json.dumps(response_data), content_type="application/json")
 #---------------------------------------------------------------------------------------    
                                         
 def display_view1(request):

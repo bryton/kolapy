@@ -1,6 +1,6 @@
 <div id="tabtabCounter">
 	<div class ="ctabCounter stats_block">
-		<h3>Microsoft Corporation</h3>
+		<h3>Apple Inc.</h3>
 		<table border="1">
 			<tr>
 				<th colspan="2">Statical Summary</th>
@@ -29,12 +29,12 @@
 
 
 	<!-- Basic ticker and date range information form -->
-	<div class="ctabCounter input_block">
+	<div class="ctabCounter view1_input_block">
 		<form>
 			<table>
 				<tr>
 					<td>Ticker</td>
-					<td><input class="ctabCounter id_ticker" type="text" value="MSFT"></td>
+					<td><input class="ctabCounter id_ticker" type="text" value="AAPL"></td>
 				</tr>
 				<tr>
 					<td>Start Date</td>
@@ -53,6 +53,10 @@
 							<option value="custom">Custom</option>
 					</select></td>
 				</tr>
+				<tr>
+					<td></td>
+					<td><input class="ctabCounter algorithm_button" type="submit" value="Run"></td>
+				</tr>
 			</table>
 			<div class="ctabCounter errors"></div>
 		</form>
@@ -61,7 +65,6 @@
 	<div class="ctabCounter code_block">
 		<form>
 			<textarea class="ctabCounter code" id="codetabCounter"></textarea>
-			<input class="ctabCounter algorithm_button" type="submit" value="Run">
 		</form>
 	</div>
 </div>

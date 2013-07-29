@@ -1,5 +1,4 @@
 var blockRedraw = false;
-
 var g_price = new Array();
 
 g_price[0] = 
@@ -120,6 +119,42 @@ $(document).on("mouseup dblclick", ".view1_graph_block", function() {
 		}
 	});
 });
+
+
+// configure typeahead
+$(document).on("focus", ".id_ticker", function() {
+	$(".id_ticker").autocomplete({
+		source: function(request, response)
+		{
+			$.ajax({
+				 url: "/typeahead/",
+				 type : "GET",
+				 dataType: "json",
+				 data : 
+				 {
+					 term : request.term
+				 },
+				 success: function(data) 
+				 {
+					 response($.map( data, function(v, i) 
+					 {
+						 return {
+							 label: v.Symbol,
+							 value: v.Symbol
+						 };
+					 }));
+				 },
+				 error : function(xhr, errmsg, err) 
+				 {
+						alert(xhr.status + ": errmsg = " + errmsg + ": "
+								+ xhr.responseText);
+				 }
+			});
+		},
+		
+	});
+});
+
 	
 // stock form submission
 $(document).on("blur", ".id_ticker, .date1, .date2", function() {

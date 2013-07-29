@@ -5,6 +5,13 @@ body
 	font-size: 93%;
 }
 
+.ui-autocomplete {
+	max-height: 100px;
+	overflow-y: auto;
+	/* prevent horizontal scrollbar */
+	overflow-x: hidden;
+}
+
 header
 {
 	font-size: 200%;
@@ -47,7 +54,7 @@ input
 	margin-top: 10px;
 }
 
-.input_block
+.view1_input_block
 {
 	background-color: #FFFFFF;
 	border: 1px solid black;
@@ -83,12 +90,17 @@ input
 
 /*The following style sheet selection is for view 2 -- multiple stock view */
 
-.view2 .input_block
+.view2_input_block
 {
-	top: 10px;
-	left: 40px;
-	width: 400px;
-	height: 400px;
+	background-color: #FFFFFF;
+	border: 1px solid black;
+	padding: 10px;
+	display: inline-block;
+	vertical-align: top;
+	width: 250px;
+	height: 280px;
+	margin-top: 4px;
+	margin-left: 10px;
 }
 
 .view2 .graph_block

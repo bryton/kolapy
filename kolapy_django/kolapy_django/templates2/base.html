@@ -32,7 +32,7 @@
 <script>
 $(document).ready(function() 
 {
-	{% include "included_files/tabs.js" %}
+	{% include "included_files/tabs2.js" %}
 	{% include "included_files/view1_js.js" %}
 });
 </script>
@@ -41,16 +41,31 @@ $(document).ready(function()
 
 
 <body>
+
+	<div id="dialog" title="Tab data">
+		<form>
+			<fieldset class="ui-helper-reset">
+				<label for="tab_title">Title</label> <input type="text"
+					name="tab_title" id="tab_title" value=""
+					class="ui-widget-content ui-corner-all" />
+			</fieldset>
+		</form>
+	</div>
+
+
 	<header>Welcome to Kolapy</header>
 
 	<button id="add_tab">Add Tab</button>
-	<input id="test" type="submit" value="test">
 	
 	<div id="tabs">
 		<ul>
 			<li><a href="#tab0">Tab 1</a> <span class="ui-icon ui-icon-close" role="presentation">Remove Tab</span></li>
 		</ul>
+		
 
+		
+
+	
 		<div id="tab0">
 			<div class="c0 stats_block">
 				<h3>Microsoft Corporation</h3>
@@ -82,12 +97,12 @@ $(document).ready(function()
 
 
 			<!-- Basic ticker and date range information form -->
-			<div class="c0 input_block">
+			<div class="c0 view1_input_block">
 				<form>
 					<table>
 						<tr>
 							<td>Ticker</td>
-							<td><input class="c0 id_ticker" type="text" value="MSFT"></td>
+							<td><input class="c0 id_ticker" type="text" value="AAPL"></td>
 						</tr>
 						<tr>
 							<td>Start Date</td>
@@ -106,6 +121,10 @@ $(document).ready(function()
 									<option value="custom">Custom</option>
 							</select></td>
 						</tr>
+						<tr>
+							<td></td>
+							<td><input class="c0 algorithm_button" type="submit" value="Run"></td>
+						</tr>
 					</table>
 					<div class="c0 errors"></div>
 				</form>
@@ -114,10 +133,12 @@ $(document).ready(function()
 			<div class="c0 code_block">
 				<form>
 					<textarea class="c0 code" id="code0"></textarea>
-					<input class="c0 algorithm_button" type="submit" value="Run">
+					
 				</form>
 			</div>
 		</div>
+		
+		
 		
 	</div>
 
