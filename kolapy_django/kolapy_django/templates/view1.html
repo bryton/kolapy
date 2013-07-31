@@ -1,82 +1,74 @@
-<div id="view1">
-	<div class="input_block">
-	
-		<!-- Basic ticker and date range information form -->
+<div id="tabtabCounter">
+	<div class ="ctabCounter stats_block">
+		<h3>Apple Inc.</h3>
+		<table border="1">
+			<tr>
+				<th colspan="2">Statical Summary</th>
+			</tr>
+			<tr>
+				<td>Mean</td>
+				<td name="mean">0.0011984</td>
+			</tr>
+			<tr>
+				<td>Standard Deviation</td>
+				<td name="stdev">0.024167</td>
+			</tr>
+			<tr>
+				<td>Beta</td>
+				<td name="beta">1.0627</td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="ctabCounter view1_graph_block">
+		<div id="graph_pricetabCounter" class="ctabCounter graph_price"></div>
+		<br>
+		<div id="graph_pnltabCounter" class="ctabCounter graph_pnl"></div>
+	</div>
+	<br>
+
+
+	<!-- Basic ticker and date range information form -->
+	<div class="ctabCounter view1_input_block">
 		<form>
 			<table>
 				<tr>
 					<td>Ticker</td>
-					<td><input id="id_ticker" type="text" value="MSFT"></td>
+					<td><input class="ctabCounter id_ticker" type="text" value="AAPL"></td>
 				</tr>
 				<tr>
 					<td>Start Date</td>
-					<td><input id="date1" class="date" type="text" value="03/13/1986"></td>
+					<td><input class="ctabCounter date1" class="date" type="text"
+						value="03/13/1986"></td>
 				</tr>
 				<tr>
 					<td>End Date</td>
-					<td><input id="date2" class="date" type="text" value="07/11/2013"></td>
+					<td><input class="ctabCounter date2" class="date" type="text"
+						value="07/11/2013"></td>
+				</tr>
+				<tr>
+					<td>Algorithm</td>
+					<td><select>
+							<option value="momentum">Momentum</option>
+							<option value="custom">Custom</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input class="ctabCounter algorithm_button" type="submit" value="Run"></td>
 				</tr>
 			</table>
-			<div id="errors"></div>
-			{% csrf_token %} 
-			<input id="options_button_view1" type="submit" value="Submit">
+			<div class="ctabCounter errors"></div>
 		</form>
-		
-		<!-- Momentum input form -->
+	</div>
+
+	<div class="ctabCounter code_block">
 		<form>
-			<table>
-				<tr>
-					<td>Minimum Increase</td>
-					<td><input id="min_increase" type="text"></td>
-				</tr>
-				<tr>
-					<td>N</td>
-					<td><input id="N_consecutive_days" type="text"></td>
-				</tr>
-				<tr>
-					<td>D</td>
-					<td><input id="D_days_after" type="text"></td>
-				</tr>
-				<tr>
-					<td>Shares</td>
-					<td><input id="number_of_shares" type="text"></td>
-				</tr>
-			</table>
-			{% csrf_token %} 
-			<input id="momentum_button" type="submit" value="Submit">
-		</form>
-		<br>
-
-		<div id="stats_block">
-			Statistical Summary of Returns<br>
-			<div id="stats"></div>
-		</div>
-
-	</div>
-
-
-	<div class="graph_block">
-		<div id="graph_price" style="width: 830px;"></div>
-		<br>
-		<div id="graph_pnl" style="width: 830px;"></div>
-		<p>
-			<b>Display: </b> <input type=checkbox id="0" checked> <label
-				for="0">Price</label> <input type=checkbox id="1" checked> <label
-				for="1">PnL</label>
-		</p>
-	</div>
-	
-	<div class="algorithm_block">
-		<form>
-			<div id="code_block">
-				<textarea id="code" name="code">print "Hello"</textarea>
-				<input id="algorithm_button" type="submit" value="Submit">
-			</div>
+			<textarea class="ctabCounter code" id="codetabCounter"></textarea>
 		</form>
 	</div>
-	
-
-	
-	
-	
 </div>
+
+
+
+

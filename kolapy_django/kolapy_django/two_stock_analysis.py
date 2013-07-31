@@ -33,8 +33,9 @@ class two_stock_analysis:
         y = da.selection(self.df2['Adj_Close'], start, end)
         ols_result = sm.OLS(x, y).fit()
         resid = ols_result.resid   
+        
         # compute regression residuals
-        adfuller_results = ts.adfuller(resid)  # run A.D.F. test on residuals
+        adfuller_results = ts.adfuller(resid)
         print "cointegration: " + str(adfuller_results[1])
         bound = pd.Series(movvar(resid, 30)) ** 0.5
         resid_rolling_average = da.exp_moving_average(resid, 0.1)
@@ -47,6 +48,7 @@ class two_stock_analysis:
     
     def full_summary(self, ticker1, ticker2, start, end, isInitial):
         if not (ticker1 == self.ticker1 and ticker2 == self.ticker2) or (not isInitial and not self.json):
+            print "yikes"
             self.__init__(ticker1, ticker2, True)
         csv = {
             'price_csv1' : self.price_csv1, 

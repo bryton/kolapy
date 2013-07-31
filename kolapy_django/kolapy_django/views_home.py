@@ -6,6 +6,7 @@ import two_stock_analysis as tsa
 import backtester as bt
 import fixed_income
 import json
+import os
 import urllib2
 
 last_osa = None
@@ -29,6 +30,16 @@ def home(request):
                                          'flip' : summary_tsa['flip']})
     
 #---------------------------------------------------------------------------------------    
+
+def load_tab(request):
+    tabCounter = str(request.POST.get('tabCounter'))
+    current_dir = os.path.dirname(__file__)
+    path = os.path.join(current_dir, 'templates/view1.html')
+    html = open(path).read()
+    html = html.replace('\n', '').replace('\t', '').replace('tabCounter', tabCounter)
+    response_data = {'html' : html}
+    return HttpResponse(json.dumps(response_data), content_type="application/json")
+
 
 def google_finance_api(request):
     #prefix = "http://finance.google.com/finance/info?client=ig&q="
@@ -57,6 +68,7 @@ def display_view1(request):
     return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 #---------------------------------------------------------------------------------------  
+
 
 def algorithm(request):
     ticker = str(request.POST.get('ticker'))
