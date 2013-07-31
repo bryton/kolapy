@@ -28,12 +28,12 @@ backtester.py
 	class backtester
 	-----------------------------------------------------------------------------------------------
 	__init__(strategy, ticker, start, end)   Initialize backtester for given strategy 
-											 executed on a ticker over a specified date range	
+						 executed on a ticker over a specified date range	
 											 
-	cps()									 Get cents per share from this backtester
+	cps()					 Get cents per share from this backtester
 	
-	full_summary()							 -Return PNL and cumulative PNL in csv format for Dygraph
-											 as well as cents per share from this backtester
+	full_summary()				 -Return PNL and cumulative PNL in csv format for Dygraph
+						 as well as cents per share from this backtester
 
 
 
@@ -42,21 +42,21 @@ data_analysis.py
 (General static functions to be used by one stock, two stock, and N stock modules)
 
 	------------------------------------------------------------------------------------------------
-	dataframe(ticker)						 Get pandas dataframe from ticker
+	dataframe(ticker)			 Get pandas dataframe from ticker
 	
-	name(ticker)							 Get full name of company from ticker
+	name(ticker)				 Get full name of company from ticker
 	
-	typeahead(term)							 Get Python dictionary containing all ticker names that begin
-											 with term string (key = ticker, value = company name)
+	typeahead(term)				 Get Python dictionary containing all ticker names that begin
+						 with term string (key = ticker, value = company name)
 											 
-	csv(series, json)						 Get csv of time series (in order to draw Dygraph). Set 
-											 json to True to get it into JSON format for an ajax call
+	csv(series, json)			 Get csv of time series (in order to draw Dygraph). Set 
+						 json to True to get it into JSON format for an ajax call
 	
-	selection(series, start, end) 			 Get new series from original series and specified 
+	selection(series, start, end) 		 Get new series from original series and specified 
 											 date range
 											 
-	exp_moving_average(series, alpha)		 Get exponential moving average of this series given alpha
-											 (where alpha is the weight of the newest observation)
+	exp_moving_average(series, alpha)	 Get exponential moving average of this series given alpha
+						 (where alpha is the weight of the newest observation)
 	
 
 
@@ -65,60 +65,60 @@ one_stock_analysis.py
 
 	class osa
 	------------------------------------------------------------------------------------------------
-	__init__(ticker, json)					      Initialize a new osa object for given ticker
+	__init__(ticker, json)			 Initialize a new osa object for given ticker
 	
-	summary_stats(start, end)				      Get mean and standard deviation of returns as well as beta 
-											      for this ticker over the specified date range
+	summary_stats(start, end)		 Get mean and standard deviation of returns as well as beta 
+						 for this ticker over the specified date range
 											 
 	full_summary(ticker, start, end, isInitial)   Get full summary for this osa object (the Price and PnL csv,
-												  summary stats, and full name of company). Note: isInitial is 
-												  set to True if this function is called when the user submits 
-												  a request to home and false otherwise -- we keep track of 
-												  this in order to determine whether the returned csv data for 
-												  the Dygraphs should fit a JSON format.
+						      summary stats, and full name of company). Note: isInitial is 
+						      set to True if this function is called when the user submits 
+						      a request to home and false otherwise -- we keep track of 
+						      this in order to determine whether the returned csv data for 
+						      the Dygraphs should fit a JSON format.
 
 two_stock_analyis.py
 
 	class tsa
 	------------------------------------------------------------------------------------------------
-	__init__(ticker1, ticker2, json)			            Initialize a new tsa object for given pair
+	__init__(ticker1, ticker2, json)			Initialize a new tsa object for given pair
 	
-	cointegration_test(start, end)				            Return residuals csv (for Dygraph)
+	cointegration_test(start, end)				Return residuals csv (for Dygraph)
 	
 	full_summary(ticker1, ticker2, start, end, isInitial)   Get full summary for this tsa object to be returned
-															to the ajax call (Price1, Price2 and residual csv. 
-															Eventually this should return more information about
-															the results of the Augmented Dickey Fuller Test as well
-															as other two stock algorithms).
+								to the ajax call (Price1, Price2 and residual csv. 
+								Eventually this should return more information about
+								the results of the Augmented Dickey Fuller Test as well
+								as other two stock algorithms).
 
 
 views_home.py
 
 	-----------------------------------------------------------------------------------------------
-	home(request)											display the homepage
+	home(request)						display the homepage
 	
-	load_tab(request)										Return HTML that will populate the new tab
+	load_tab(request)					Return HTML that will populate the new tab
 	
-	google_finance_api(request)								return JSON object containing basic information 
-															about ticker (company name, exchange, etc.)
+	google_finance_api(request)				Return JSON object containing basic information 
+								about ticker (company name, exchange, etc.)
 
-	typeahead(request)										return JSON object containing all tickers that begin
-															with term currently in the ticker field
+	typeahead(request)					return JSON object containing all tickers that begin
+								with term currently in the ticker field
+												
+	display_view1(request)					Update osa object based on user request and return 
+								its full summary
 															
-	display_view1(request)									Update osa object based on user request and return 
-															its full summary
+	algorithm(request)					Run the Python strategy that the user inputted into 
+								code block and return backtester results
 															
-	algorithm(request)										Run the Python strategy that the user inputted into 
-															code block and return backtester results
+	display_view2(request)					Update tsa object based on user request and return
+								its full summary
 															
-	display_view2(request)									Update tsa object based on user request and return
-															its full summary
+	cointegration(request)					Test for cointegration on the specified stock pair and 
+								date range and returns results
 															
-	cointegration(request)									Test for cointegration on the specified stock pair and 
-															date range and returns results
-															
-	settlement(request)										Returns the price of the fixed income specified by
-															the user
+	settlement(request)					Returns the price of the fixed income specified by
+								the user
 															
 															
 
