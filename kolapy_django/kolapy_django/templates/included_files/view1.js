@@ -3,7 +3,6 @@
  ************************************************************************************/
 
 
-var blockRedraw = false; // is any given Price or PNL graph currently being redrawn?
 var g_price = new Array(); // array of view 1 price graphs (g_price[i] refers to price graph on i-th tab)
 
 // construct price graph for tab 0 when request is sent to home
@@ -77,11 +76,11 @@ g_pnl[0] =
 	
 	});
 
-// when a specific date range on the graph using the mouse, update the start and end fields as well as
+// when the user selects a specific date range using the mouse, update the start and end fields as well as
 // the statistics block
 var zeropad = Dygraph.zeropad;
 $(document).on("mouseup dblclick", ".view1_graph_block", function() {
-	var tabIndex = parseInt($(this).attr("class").replace(/\s+/, " ").split(" ")[0].substring(1, 2), 10);
+	var tabIndex = parseInt($(this).attr("class").replace(/\s+/, " ").split(" ")[1].substring(1, 2), 10);
 
 	var ticker = $(".c" + tabIndex + ".id_ticker").val();
 	var range = g_price[tabIndex].xAxisRange();
@@ -134,7 +133,7 @@ $(document).on("mouseup dblclick", ".view1_graph_block", function() {
 // submit the stock form and display the corresponding graph when the user updates and exits any of 
 // the three fields (ticker, start, or end)
 $(document).on("blur", ".id_ticker, .date1, .date2", function() {
-	var tabIndex = parseInt($(this).attr("class").replace(/\s+/, " ").split(" ")[0].substring(1, 2), 10);
+	var tabIndex = parseInt($(this).attr("class").replace(/\s+/, " ").split(" ")[1].substring(1, 2), 10);
 	$(".c" + tabIndex + ".errors").html("");
 	
 	
@@ -226,7 +225,7 @@ editor[0] =
 // Run the string in code block as a Python function on the server and redraw the PnL graph based on
 // the results
 $(document).on("click", ".algorithm_button", function() {
-	var tabIndex = parseInt($(this).attr("class").replace(/\s+/, " ").split(" ")[0].substring(1, 2), 10);
+	var tabIndex = parseInt($(this).attr("class").replace(/\s+/, " ").split(" ")[1].substring(1, 2), 10);
 	var ticker = $(".c" + tabIndex + ".id_ticker").val();
 	var start = $(".c" + tabIndex + ".date1").val();
 	var end = $(".c" + tabIndex + ".date2").val();

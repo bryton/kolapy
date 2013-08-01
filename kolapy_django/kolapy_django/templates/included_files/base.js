@@ -20,6 +20,8 @@ tabs.find(".ui-tabs-nav").sortable({
 	}
 });
 
+$('#tab0 *').addClass("c0");
+
 
 // create new tab and corresponding HTML content when new tab is clicked. 
 // Then programmatically select new tab and open dialog box
@@ -44,6 +46,7 @@ $("#add_tab").click(function() {
 			tabs.append("<div id='" + id + "'>" + received_data.html + "</div>"); //add HTML
 			tabs.tabs("refresh");												  // refresh tabs
 			$( "#tabs" ).tabs("option", "active", tabListLength);				  // select this new tab
+			$("#" + id + " *").addClass("c" + tabCounter);
 			
 		},
 		error : function(xhr, errmsg, err) {
@@ -62,7 +65,7 @@ var dialog = $("#dialog").dialog({
 	autoOpen : false,
 	modal : true,
 	buttons : {
-		// when "Add" button is clicked, make the html on the tab page interactive
+		// when "Add" button is clicked, make the HTML on the tab page interactive
 		Add : function() {
 			makeInteractive();
 			$(this).dialog("close");
@@ -93,7 +96,7 @@ tabs.delegate("span.ui-icon-close", "click", function() {
 // set global tabIndex variable equal to currently activated tab
 $(document).on("mousemove", ".view1_graph_block", function() 
 {
-	window.tabIndex = parseInt($(this).attr("class").replace(/\s+/, " ").split(" ")[0].substring(1, 2), 10);
+	window.tabIndex = parseInt($(this).attr("class").replace(/\s+/, " ").split(" ")[1].substring(1, 2), 10);
 });
 
 

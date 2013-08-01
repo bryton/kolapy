@@ -1,91 +1,19 @@
-	var div1 = "graph_price10";
-	var div2 = "graph_price20";
 	
-	if ("{{ flip }}" == "True")
-	{
-		var t = div1;
-		div1 = div2;
-		div2 = t;
-	}
-
-	g_stock1 = new Array(); /*
-	g_stock1[0] = new Dygraph(document.getElementById("graph_price10"),
-	"{{ price_csv1 }}",
-	{});
-	{
-		labels: ["Date", "Price"],
-		fillGraph: true
-	}); // end of g1 initialization
+	g_price1 = new Array();
 	
-	g_stock2 = new Dygraph(document.getElementById(div2),
-	"{{ price_csv2 }}",
-	{
-		labels: ["Date", "PnL"],
-		fillGraph: true,
-	}); // end of g2 initialization
+	g_price2 = new Array();
 	
-	if ("{{ flip }}" == "True")
-	{
-		var t = g_stock1[0];
-		g_stock1[0] = g_stock2[0];
-		g_stock2[0] = t;
-	}
 	
 	g_spread = new Array();
-	g_spread[0] = new Dygraph(document.getElementById("graph_spread0"));
 	
-	g_stock1[0].updateOptions({
-		colors: ["purple"],
-		highlightCallback: function(e, x, pts, row) {
-			g_stock2[0].setSelection(row + g_stock2[0].numRows() - g_stock1[0].numRows());
-		},
-		unhighlightCallback: function(e, x, pts, row) {					
-			g_stock1[0].clearSelection();
-			g_stock2[0].clearSelection();
-		}, 
-		drawCallback: function(me, initial) {
-            if (blockRedraw || initial) return;
-            blockRedraw = true;
-            var range = me.xAxisRange();
-            
-            g_stock2[0].updateOptions({
-                dateWindow: range,
-            });
-            
-            blockRedraw = false;
-		}
-	});
 	
-	g_stock2[0].updateOptions({
-		colors: ["blue"],
-		highlightCallback: function(e, x, pts, row) {
-			g_stock1[0].setSelection(row - g_stock2[0].numRows() + g_stock1[0].numRows());
-		},
-		unhighlightCallback: function(e, x, pts, row) {					
-			g_stock1[0].clearSelection();
-			g_stock2[0].clearSelection();
-		},
-		drawCallback: function(me, initial) {
-	        if (blockRedraw || initial) return;
-            blockRedraw = true;
-            var range = me.xAxisRange();
-            g_stock1[0].updateOptions({
-            	dateWindow: range,
-            });
-	                
-            blockRedraw = false;
-		},				
-		showRangeSelector: true,
-		rangeSelectorPlotStrokeColor: "white",
-		rangeSelectorPlotFillColor: "white",
-	});
-	
-	$("#options_button_view2").click(function(){
+	$(document).on("blur", ".id_ticker1, .id_ticker2, .view2_date1, .view2_date2", function(){
+		var tabIndex = parseInt($(this).attr("class").replace(/\s+/, " ").split(" ")[1].substring(1, 2), 10);
 
-		var ticker1 = $(".c0.id_ticker1").val();
-		var ticker2 = $(".c0.id_ticker2").val();
-		var start_string = $(".c0.view2_date1").val();
-		var end_string = $(".c0.view2_date2").val();
+		var ticker1 = $(".c" + tabIndex + ".id_ticker1").val();
+		var ticker2 = $(".c" + tabIndex + ".id_ticker2").val();
+		var start_string = $(".c" + tabIndex + ".view2_date1").val();
+		var end_string = $(".c" + tabIndex + ".view2_date2").val();
 		var start = Date.parse(start_string + " 00:00:00"); 
 		var end = Date.parse(end_string + " 24:00:00");
 		
@@ -110,12 +38,12 @@
 					file2 = t;
 				}
 				
-				g_stock1[0].updateOptions({
+				g_price1[0].updateOptions({
 					labels : ["Date", "Price"],
 					file : file1,
 					dateWindow : [start, end]
 				});
-				g_stock2[0].updateOptions({
+				g_price2[0].updateOptions({
 					labels: ["Date", "Price"],
 					file: file2,
 					dateWindow: [start, end]
@@ -131,11 +59,43 @@
 		return false;
 	});
 	
+	
+	var zeropad = Dygraph.zeropad;
+	$(document).on("mouseup dblclick", ".view2_graph_block", function() {
+		var tabIndex = parseInt($(this).attr("class").replace(/\s+/, " ").split(" ")[1].substring(1, 2), 10);
+
+		var ticker1 = $(".c" + tabIndex + ".id_ticker1").val();
+		var ticker2 = $(".c" + tabIndex + ".id_ticker2").val();
+		var range = g_price1[tabIndex].xAxisRange();
+		var d0 = new Date(range[0]);
+		var d1 = new Date(range[1]);
+		var start_month = zeropad(d0.getMonth() + 1);
+		var start_day = zeropad(d0.getDate());
+		var start_year = "" + d0.getFullYear();
+		
+		var start = start_month + "/" + start_day + "/"
+		+ start_year;
+		
+		var end_month = zeropad(d1.getMonth() + 1);
+		var end_day = zeropad(d1.getDate());
+		var end_year = "" + d1.getFullYear();
+		
+		var end = end_month + "/" + end_day + "/" + end_year;
+		
+		// update start and end fields with the new values
+		$(".c" + tabIndex + ".view2_date1").val(start);
+		$(".c" + tabIndex + ".view2_date2").val(end);
+	});
+	
+	
 	$(".cointegrate_button").click(function(){
-		var ticker1 = $(".c0.id_ticker1").val();
-		var ticker2 = $(".c0.id_ticker2").val();
-		var start_string = $(".c0.view2_date1").val();
-		var end_string = $(".c0.view2_date2").val();
+		alert("ii");
+		var tabIndex = parseInt($(this).attr("class").replace(/\s+/, " ").split(" ")[1].substring(1, 2), 10);
+		
+		var ticker1 = $(".c" + tabIndex + ".id_ticker1").val();
+		var ticker2 = $(".c" + tabIndex + ".id_ticker2").val();
+		var start_string = $(".c" + tabIndex + ".view2_date1").val();
+		var end_string = $(".c" + tabIndex + ".view2_date2").val();
 		
 		
 		$.ajax({
@@ -151,7 +111,8 @@
 			},
 			success : function(received_data)
 			{
-				g_spread[0].updateOptions({
+				g_spread[tabIndex] = new Dygraph(document.getElementById("graph_spread" + tabIndex));
+				g_spread[tabIndex].updateOptions({
 					labels: ["Date", "Residual", "Upper Bound", "Lower Bound"],
 					file: received_data.csv,
 					colors: ["blue", "red", "red"],
@@ -167,4 +128,6 @@
 		});
 		
 		return false;
-	});*/
+	});
+	
+

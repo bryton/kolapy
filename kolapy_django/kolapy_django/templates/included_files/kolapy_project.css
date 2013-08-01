@@ -29,12 +29,12 @@ input
 /* The following style sheet selection is for view 1 -- one stock view */
 
 
-.stats_block
+.view1_stats_block
 {
 	background-color: #FFFFFF;
 	display: inline-block;
 	vertical-align: top;
-	height: 485px;
+	height: 465px;
 	width: 250px;
 	padding: 10px;
 	border: 1px solid black;
@@ -48,9 +48,9 @@ input
 	border: 1px solid black;
 	display: inline-block;
 	vertical-align: top;
-	width: 800px;
+	width: 900px;
 	height: 465px;
-	padding: 20px;
+	padding: 10px;
 	margin-top: 10px;
 }
 
@@ -78,7 +78,7 @@ input
 {
 	display: inline-block;
 	vertical-align: top;
-	width: 842px;
+	width: 922px;
 	margin-top: 4px;
 }
 
@@ -91,29 +91,29 @@ input
 /*The following style sheet selection is for view 2 -- multiple stock view */
 
 
-.view2_graph_block
+.view2_stats_block
 {
 	background-color: #FFFFFF;
-	border: 1px solid black;
-	top: 10px;
-	left: 520px;
-	width: 900px;
-	padding: 20px;
-}
-
-.view2_input_block
-{
-	background-color: #FFFFFF;
-	border: 1px solid black;
-	padding: 10px;
 	display: inline-block;
 	vertical-align: top;
+	height: 750px;
 	width: 250px;
-	height: 280px;
-	margin-top: 4px;
+	padding: 10px;
+	border: 1px solid black;
 	margin-left: 10px;
+	margin-top: 10px;
 }
 
+.view2_graph_block
+{
+	display: inline-block;
+	vertical-align: top;
+	background-color: #FFFFFF;
+	border: 1px solid black;
+	margin-top: 10px;
+	width: 900px;
+	padding: 10px;
+}
 
 /* The following style sheet selection is for view 4 -- structured settlements */
 .settlement_table

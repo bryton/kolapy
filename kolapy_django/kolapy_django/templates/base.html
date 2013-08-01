@@ -1,7 +1,6 @@
 <!-- Defines the skeleton of the Kolapy website -->
 
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,10 +33,9 @@
 <script>
 $(document).ready(function() 
 {
-	{% include "included_files/base.js" %}
+	{% include "included_files/base2.js" %}
 	{% include "included_files/view1.js" %}
 	{% include "included_files/view2.js" %}
-	
 	
 });
 </script>
@@ -46,15 +44,18 @@ $(document).ready(function()
 
 
 <body>
-
+	<input type=button class="cointegrate_button" value="submit">cointegrate</input>
 	<!-- dialog box to be opened when user creates new tab -->
 	<div id="dialog" title="Tab data">
 		<form>
 			<fieldset class="ui-helper-reset">
 				<label for="tab_title">Title</label> <input type="text"
 					name="tab_title" id="tab_title" value=""
-					class="ui-widget-content ui-corner-all" />
+					class="ui-widget-content ui-corner-all" /> <br>
+				<input type="radio" name="view" value="view1">View 1<br>
+				<input type="radio" name="view" value="view2">View 2
 			</fieldset>
+
 		</form>
 	</div>
 
@@ -78,50 +79,9 @@ $(document).ready(function()
 		
 		<div id="tab0">
 
-			<div class="c0 view2_graph_block">
-				<div id="graph_price10" style="width: 830px; height: 250px;"></div>
-				<div id="graph_price20" style="width: 830px; height: 250px;"></div>
-				<div id="graph_spread0" style="width: 830px; height: 250px;"></div>
-			</div>
+			<!-- view 1 HTML (this is what the user sees in the first tab by default when they visit home -->
 		
-		
-			
-			<div class="c0 view2_input_block">
-				<form>
-					<table>
-						<tr>
-							<td>Ticker 1</td>
-							<td><input class="c0 id_ticker1 ticker" type="text"></td>
-						</tr>
-						<tr>
-							<td>Ticker 2</td>
-							<td><input id="c0 id_ticker2 ticker" type="text"></td>
-						</tr>
-						<tr>
-							<td>Start Date</td>
-							<td><input class="c0 view2_date1" type="text" value=""></td>
-						</tr>
-						<tr>
-							<td>End Date</td>
-							<td><input class="c0 view2_date2" type="text" value=""></td>
-						</tr>
-					</table>
-					<div id="errors"></div>
-					{% csrf_token %} <input id="view2_options_button" type="submit"
-						value="Submit"> <input class="c0 cointegrate_button"
-						type="submit" value="Cointegration Results">
-				</form>
-			</div> 
-
-
-
-		
-
-
-
-		<!-- view 1 HTML (this is what the user sees in the first tab by default when they visit home -->
-		
-			<div class="c0 stats_block">
+			<div class="view1_stats_block">
 				<h3>Apple Inc.</h3>
 				<table border="1">
 					<tr>
@@ -142,30 +102,30 @@ $(document).ready(function()
 				</table>
 			</div>
 
-			<div class="c0 view1_graph_block">
-				<div id="graph_price0" class="c0 graph_price"></div>
+			<div class="view1_graph_block">
+				<div id="graph_price0" class="graph_price"></div>
 				<br>
-				<div id="graph_pnl0" class="c0 graph_pnl"></div>
+				<div id="graph_pnl0" class="graph_pnl"></div>
 			</div>
 			<br>
 
 
 			<!-- Basic ticker and date range information form -->
-			<div class="c0 view1_input_block">
+			<div class="view1_input_block">
 				<form>
 					<table>
 						<tr>
 							<td>Ticker</td>
-							<td><input class="c0 id_ticker" type="text" value="AAPL"></td>
+							<td><input class="id_ticker" type="text" value="AAPL"></td>
 						</tr>
 						<tr>
 							<td>Start Date</td>
-							<td><input class="c0 date1" class="date" type="text"
+							<td><input class="date1" class="date" type="text"
 								value="03/13/1986"></td>
 						</tr>
 						<tr>
 							<td>End Date</td>
-							<td><input class="c0 date2" class="date" type="text"
+							<td><input class="date2" class="date" type="text"
 								value="07/11/2013"></td>
 						</tr>
 						<tr>
@@ -177,21 +137,20 @@ $(document).ready(function()
 						</tr>
 						<tr>
 							<td></td>
-							<td><input class="c0 algorithm_button" type="submit" value="Run"></td>
+							<td><input class="algorithm_button" type="submit" value="Run"></td>
 						</tr>
 					</table>
-					<div class="c0 errors"></div>
+					<div class="errors"></div>
 				</form>
 			</div>
 
-			<div class="c0 code_block">
+			<div class="code_block">
 				<form>
-					<textarea class="c0 code" id="code0"></textarea>
+					<textarea class="code" id="code0"></textarea>
 					
 				</form>
 			</div>
 		</div>
-
 	</div>
 
 </body>

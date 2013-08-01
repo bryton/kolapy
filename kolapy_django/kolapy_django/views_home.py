@@ -18,7 +18,7 @@ def home(request):
     global last_osa
     global last_tsa
     last_osa = osa.one_stock_analysis('AAPL', False)
-    last_tsa = tsa.two_stock_analysis('SCHD', 'SCHB', False)
+    last_tsa = tsa.two_stock_analysis('AAPL', 'AA', False)
     summary_osa = last_osa.full_summary('AAPL', '01/01/2008', '01/01/2013', True)
     summary_tsa = last_tsa.full_summary('AAPL', 'AA', '01/01/2008', '01/01/2013', True)
     csv_osa = summary_osa['csv']
@@ -32,9 +32,11 @@ def home(request):
 #---------------------------------------------------------------------------------------    
 
 def load_tab(request):
+    view = str(request.POST.get('view'))
     tabCounter = str(request.POST.get('tabCounter'))
     current_dir = os.path.dirname(__file__)
-    path = os.path.join(current_dir, 'templates/view1.html')
+    viewFile = 'templates/' + view + '.html'
+    path = os.path.join(current_dir, viewFile)
     html = open(path).read()
     html = html.replace('\n', '').replace('\t', '').replace('tabCounter', tabCounter)
     response_data = {'html' : html}
@@ -90,6 +92,7 @@ def display_view2(request):
     ticker2 = str(request.POST.get('ticker2'))
     start = str(request.POST.get('start'))
     end = str(request.POST.get('end'))
+    print ticker1 + ticker2 + start + end
     if not last_tsa.ticker1 == ticker1 and not last_tsa.ticker2 == ticker2:
         if not last_tsa.ticker1 == ticker2 and not last_tsa.ticker2 == ticker1:
             last_tsa = tsa.two_stock_analysis(ticker1, ticker2, True)

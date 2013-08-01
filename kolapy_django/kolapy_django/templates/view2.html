@@ -1,35 +1,33 @@
-<div id="view2">
-	<div class="input_block">
-		<form>
-			<table>
-				<tr>
-					<td>Ticker 1</td>
-					<td><input id="id_ticker1" type="text"></td>
-				</tr>
-				<tr>
-					<td>Ticker 2</td>
-					<td><input id="id_ticker2" type="text"></td>
-				</tr>
-				<tr>
-					<td>Start Date</td>
-					<td><input id="date1_2" class="date" type="text" value=""></td>
-				</tr>
-				<tr>
-					<td>End Date</td>
-					<td><input id="date2_2" class="date" type="text" value=""></td>
-				</tr>
-			</table>
-			<div id="errors"></div>
-			{% csrf_token %} <input id="options_button_view2" type="submit"
-				value="Submit"> <input id="cointegrate_button" type="submit"
-				value="Cointegration Results">
-		</form>
-	</div>
-	<div class="graph_block">
-		<div id="graph_price1" style="width: 830px; height: 250px;"></div>
-		<div id="graph_price2" style="width: 830px; height: 250px;"></div>
-		<div id="graph_spread" style="width: 830px; height: 250px;"></div>
-	</div>
+<div class="view2_stats_block">
+	<form>
+		<table>
+			<tr>
+				<td>Ticker 1</td>
+				<td><input class="id_ticker1 ticker" type="text" value="C"></td>
+			</tr>
+			<tr>
+				<td>Ticker 2</td>
+				<td><input class="id_ticker2 ticker" type="text" value="BAC"></td>
+			</tr>
+			<tr>
+				<td>Start Date</td>
+				<td><input class="view2_date1" type="text" value="09/08/1984"></td>
+			</tr>
+			<tr>
+				<td>End Date</td>
+				<td><input class="view2_date2" type="text" value="07/11/2013"></td>
+			</tr>
+		</table>
+		<div id="errors"></div>
+		<input type=button class="cointegrate_button" value="submit">cointegrate</input>
+	</form>
+</div>
 
-
+<div class="view2_graph_block">
+	<div id="graph_price1tabCounter" class="graph_price1"
+		style="width: 830px; height: 250px;"></div>
+	<div id="graph_price2tabCounter" class="graph_price2"
+		style="width: 830px; height: 250px;"></div>
+	<div id="graph_spreadtabCounter" class="graph_spread"
+		style="width: 830px; height: 250px;"></div>
 </div>
